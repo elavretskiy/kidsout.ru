@@ -1,0 +1,29 @@
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: kidsout_test
+  pool:     5
+  username:
+  password:
+  template: template0
+
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: kidsout_development
+  pool:     5
+  username:
+  password:
+  template: template0
+
+production:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: kidsout_production
+  pool:     5
+  username:
+  password:
+  template: template0
