@@ -20,7 +20,6 @@ class Message < ActiveRecord::Base
 
   before_save :set_is_sent
 
-  scope :by_ids, ->(ids) { where(id: ids) }
   scope :is_unread, -> { where(is_read: false) }
   scope :is_unsent, -> { where(is_sent: false) }
   scope :is_unread_and_unsent, -> { is_unread.is_unsent }
@@ -40,9 +39,8 @@ class Message < ActiveRecord::Base
 
   def self.notify_about_unread
     messages = Message.is_unread_and_unsent
-    message_ids = messages.ids
+    messages.find_each { |message| message.send_email }
     messages.update_all(is_sent: true)
-    Message.by_ids(message_ids).find_each { |message| message.send_email }
   end
 
   private
